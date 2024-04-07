@@ -1,4 +1,4 @@
-package edu.project.expense_record;
+package edu.project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

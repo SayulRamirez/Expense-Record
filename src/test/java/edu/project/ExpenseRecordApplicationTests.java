@@ -1,4 +1,4 @@
-package edu.project.expense_record;
+package edu.project;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
