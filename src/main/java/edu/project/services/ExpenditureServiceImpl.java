@@ -10,6 +10,8 @@ import edu.project.exceptions.CategoryNotFound;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @RequiredArgsConstructor
 @Service
 public class ExpenditureServiceImpl implements ExpenditureService{
@@ -18,7 +20,7 @@ public class ExpenditureServiceImpl implements ExpenditureService{
     private final ExpenditureRepository expenditureRepository;
 
     @Override
-    public ExpenditureResponse register(ExpenditureRequest request) {
+    public ExpenditureResponse register(ExpenditureRequest request, LocalDate date) {
 
         CategoryEntity category = categoryRepository.findCategoryEntityByCategory(request.category()).orElseThrow(() -> new CategoryNotFound("Category not found"));
 
@@ -26,7 +28,7 @@ public class ExpenditureServiceImpl implements ExpenditureService{
                 .title(request.title())
                 .description(request.description())
                 .amount(request.amount())
-                .date(request.date())
+                .date(date)
                 .category(category)
                 .build();
 
