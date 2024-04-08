@@ -1,6 +1,6 @@
 package edu.project.controller;
 
-import edu.project.exceptions.CategoryNotFound;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -47,8 +47,8 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(CategoryNotFound.class)
-    public Map<String, Object> handleAmountInvalid(CategoryNotFound e) {
+    @ExceptionHandler(EntityNotFoundException.class)
+    public Map<String, Object> handleAmountInvalid(EntityNotFoundException e) {
 
         Map<String, Object> response = new LinkedHashMap<>();
 
