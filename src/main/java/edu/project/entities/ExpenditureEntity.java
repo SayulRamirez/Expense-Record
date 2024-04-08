@@ -1,15 +1,14 @@
 package edu.project.entities;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Data
 @Builder
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "expenditures")
 public class ExpenditureEntity {
@@ -30,7 +29,7 @@ public class ExpenditureEntity {
     @Column(nullable = false)
     private LocalDate date;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "fk_category_expenditure"))
-    private Category category;
+    private CategoryEntity category;
 }
