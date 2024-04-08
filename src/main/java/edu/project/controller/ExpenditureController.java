@@ -2,7 +2,6 @@ package edu.project.controller;
 
 import edu.project.domain.ExpenditureRequest;
 import edu.project.domain.ExpenditureResponse;
-import edu.project.exceptions.AmountInvalid;
 import edu.project.services.ExpenditureService;
 import edu.project.services.ExpenditureServiceImpl;
 import jakarta.validation.Valid;
@@ -11,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/v1/expenditure")
@@ -25,9 +26,9 @@ public class ExpenditureController {
     @PostMapping
     public ResponseEntity<ExpenditureResponse> registerExpenditure(@Valid @RequestBody ExpenditureRequest request) {
 
-        if (request.amount() < 1) throw new AmountInvalid("The minimum amount must be 1");
+        LocalDate date = LocalDate.parse(request.date());
 
-        ExpenditureResponse response = expenditureService.register(request);
+        ExpenditureResponse response = expenditureService.register(request, date);
 
         return ResponseEntity.ok(response);
     }
