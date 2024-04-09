@@ -9,6 +9,8 @@ import edu.project.entities.ExpenditureEntity;
 import edu.project.entities.ExpenditureRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -69,5 +71,20 @@ public class ExpenditureServiceImpl implements ExpenditureService{
                 expenditure.getAmount(),
                 expenditure.getDate(),
                 expenditure.getCategory().getCategory());
+    }
+
+    @Override
+    public Page<ExpenditureResponse> findAll(Pageable pageable) {
+
+        Page<ExpenditureEntity> expenditures = expenditureRepository.findAll(pageable);
+
+        return expenditures.map(expenditure -> new ExpenditureResponse(
+                expenditure.getId(),
+                expenditure.getTitle(),
+                expenditure.getDescription(),
+                expenditure.getAmount(),
+                expenditure.getDate(),
+                expenditure.getCategory().getCategory())
+        );
     }
 }
