@@ -55,4 +55,10 @@ public class ExpenditureController {
 
         return ResponseEntity.ok(expenditureService.findAll(pageable));
     }
+
+    @GetMapping("/search/date={date}")
+    public ResponseEntity<Page<ExpenditureResponse>> searchExpenditureByDate(@PathVariable LocalDate date, Pageable pageable) {
+
+        return ResponseEntity.ok(expenditureService.searchByDate(date, pageable));
+    }
 }
