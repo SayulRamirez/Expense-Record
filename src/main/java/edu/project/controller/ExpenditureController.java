@@ -9,7 +9,9 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.time.LocalDate;
 
 @RestController
@@ -30,7 +32,9 @@ public class ExpenditureController {
 
         ExpenditureResponse response = expenditureService.register(request, date);
 
-        return ResponseEntity.ok(response);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(response.id()).toUri();
+
+        return ResponseEntity.created(location).body(response);
     }
 
     @Transactional
