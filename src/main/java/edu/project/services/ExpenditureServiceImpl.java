@@ -87,4 +87,19 @@ public class ExpenditureServiceImpl implements ExpenditureService{
                 expenditure.getCategory().getCategory())
         );
     }
+
+    @Override
+    public Page<ExpenditureResponse> searchByDate(LocalDate date, Pageable pageable) {
+
+        Page<ExpenditureEntity> expenditures = expenditureRepository.findAllByDate(date, pageable);
+
+        return expenditures.map(expenditure -> new ExpenditureResponse(
+                expenditure.getId(),
+                expenditure.getTitle(),
+                expenditure.getDescription(),
+                expenditure.getAmount(),
+                expenditure.getDate(),
+                expenditure.getCategory().getCategory())
+        );
+    }
 }

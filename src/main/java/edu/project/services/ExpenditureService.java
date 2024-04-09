@@ -14,4 +14,6 @@ public interface ExpenditureService {
     ExpenditureResponse edit(ExpenditureUpdate request, LocalDate date);
 
     Page<ExpenditureResponse> findAll(Pageable pageable);
+
+    Page<ExpenditureResponse> searchByDate(LocalDate date, Pageable pageable);
 }
