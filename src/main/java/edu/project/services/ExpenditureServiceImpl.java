@@ -36,6 +36,7 @@ public class ExpenditureServiceImpl implements ExpenditureService{
         expenditureRepository.save(expenditure);
 
         return new ExpenditureResponse(
+                expenditure.getId(),
                 expenditure.getTitle(),
                 expenditure.getDescription(),
                 expenditure.getAmount(),
@@ -62,6 +63,7 @@ public class ExpenditureServiceImpl implements ExpenditureService{
         expenditureRepository.save(expenditure);
 
         return new ExpenditureResponse(
+                expenditure.getId(),
                 expenditure.getTitle(),
                 expenditure.getDescription(),
                 expenditure.getAmount(),
