@@ -6,6 +6,8 @@ import edu.project.domain.ExpenditureUpdate;
 import edu.project.services.ExpenditureService;
 import edu.project.services.ExpenditureServiceImpl;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -46,5 +48,11 @@ public class ExpenditureController {
         ExpenditureResponse response = expenditureService.edit(request, date);
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<Page<ExpenditureResponse>> getAllExpenditure(Pageable pageable) {
+
+        return ResponseEntity.ok(expenditureService.findAll(pageable));
     }
 }
