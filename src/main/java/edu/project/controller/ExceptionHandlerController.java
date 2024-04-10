@@ -1,5 +1,6 @@
 package edu.project.controller;
 
+import edu.project.exceptions.DateValidationException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -49,6 +50,19 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(EntityNotFoundException.class)
     public Map<String, Object> handleAmountInvalid(EntityNotFoundException e) {
+
+        Map<String, Object> response = new LinkedHashMap<>();
+
+        response.put("timestamp", LocalDateTime.now());
+        response.put("error", HttpStatus.BAD_REQUEST);
+        response.put("message", e.getMessage());
+
+        return response;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DateValidationException.class)
+    public Map<String, Object> handleDateValidationException(DateValidationException e) {
 
         Map<String, Object> response = new LinkedHashMap<>();
 
