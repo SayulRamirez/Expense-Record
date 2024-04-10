@@ -17,4 +17,7 @@ public interface ExpenditureRepository extends JpaRepository<ExpenditureEntity, 
 
     @Query(value = "SELECT e FROM ExpenditureEntity e WHERE Month(e.date) = :month")
     Page<ExpenditureEntity> findAllByMonth(Integer month, Pageable pageable);
+
+    @Query(value = "SELECT e FROM ExpenditureEntity e WHERE e.category.id = :id")
+    Page<ExpenditureEntity> findByCategory(Integer id, Pageable pageable);
 }
