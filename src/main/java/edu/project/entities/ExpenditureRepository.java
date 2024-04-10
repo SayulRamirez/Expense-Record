@@ -11,4 +11,6 @@ import java.time.LocalDate;
 public interface ExpenditureRepository extends JpaRepository<ExpenditureEntity, Long> {
 
     Page<ExpenditureEntity> findAllByDate(LocalDate date, Pageable pageable);
+
+    Page<ExpenditureEntity> findAllByDateBetween(LocalDate startDate, LocalDate endDate, Pageable pageable);
 }
