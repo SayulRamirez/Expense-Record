@@ -20,4 +20,6 @@ public interface ExpenditureService {
     Page<ExpenditureResponse> searchBetweenTwoDate(LocalDate startDate, LocalDate endDate, Pageable pageable);
 
     Page<ExpenditureResponse> searchByMonth(Integer month, Pageable pageable);
+
+    Page<ExpenditureResponse> findByCategory(String category, Pageable pageable);
 }

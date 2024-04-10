@@ -132,4 +132,21 @@ public class ExpenditureServiceImpl implements ExpenditureService{
                 expenditure.getCategory().getCategory())
         );
     }
+
+    @Override
+    public Page<ExpenditureResponse> findByCategory(String category, Pageable pageable) {
+
+        Integer id = categoryRepository.findCategoryEntityByCategory(category).orElseThrow(() -> new EntityNotFoundException("Category not found whit: " + category)).getId();
+
+        Page<ExpenditureEntity> expenditures = expenditureRepository.findByCategory(id, pageable);
+
+        return expenditures.map(expenditure -> new ExpenditureResponse(
+                expenditure.getId(),
+                expenditure.getTitle(),
+                expenditure.getDescription(),
+                expenditure.getAmount(),
+                expenditure.getDate(),
+                expenditure.getCategory().getCategory())
+        );
+    }
 }
