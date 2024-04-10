@@ -80,4 +80,10 @@ public class ExpenditureController {
 
         return ResponseEntity.ok(expenditureService.searchByMonth(month, pageable));
     }
+
+    @GetMapping("/search/category={category}")
+    public ResponseEntity<Page<ExpenditureResponse>> searchExpenditureByCategory(@PathVariable String category, Pageable pageable) {
+
+        return ResponseEntity.ok(expenditureService.findByCategory(category, pageable));
+    }
 }
