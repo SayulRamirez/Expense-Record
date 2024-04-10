@@ -149,4 +149,9 @@ public class ExpenditureServiceImpl implements ExpenditureService{
                 expenditure.getCategory().getCategory())
         );
     }
+
+    @Override
+    public void delete(Long id) {
+        expenditureRepository.deleteById(id);
+    }
 }

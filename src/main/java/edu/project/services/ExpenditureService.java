@@ -22,4 +22,6 @@ public interface ExpenditureService {
     Page<ExpenditureResponse> searchByMonth(Integer month, Pageable pageable);
 
     Page<ExpenditureResponse> findByCategory(String category, Pageable pageable);
+
+    void delete(Long id);
 }
