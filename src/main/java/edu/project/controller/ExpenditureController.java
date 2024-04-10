@@ -86,4 +86,12 @@ public class ExpenditureController {
 
         return ResponseEntity.ok(expenditureService.findByCategory(category, pageable));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+
+        expenditureService.delete(id);
+
+        return ResponseEntity.notFound().build();
+    }
 }
