@@ -117,4 +117,19 @@ public class ExpenditureServiceImpl implements ExpenditureService{
                 expenditure.getCategory().getCategory())
         );
     }
+
+    @Override
+    public Page<ExpenditureResponse> searchByMonth(Integer month, Pageable pageable) {
+
+        Page<ExpenditureEntity> expenditures = expenditureRepository.findAllByMonth(month, pageable);
+
+        return expenditures.map(expenditure -> new ExpenditureResponse(
+                expenditure.getId(),
+                expenditure.getTitle(),
+                expenditure.getDescription(),
+                expenditure.getAmount(),
+                expenditure.getDate(),
+                expenditure.getCategory().getCategory())
+        );
+    }
 }
