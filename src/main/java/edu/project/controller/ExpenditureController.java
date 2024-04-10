@@ -4,6 +4,7 @@ import edu.project.domain.ExpenditureRequest;
 import edu.project.domain.ExpenditureResponse;
 import edu.project.domain.ExpenditureUpdate;
 import edu.project.exceptions.DateValidationException;
+import edu.project.exceptions.MonthInvalidException;
 import edu.project.services.ExpenditureService;
 import edu.project.services.ExpenditureServiceImpl;
 import jakarta.validation.Valid;
@@ -70,5 +71,13 @@ public class ExpenditureController {
         if (endDate.isBefore(startDate)) throw new DateValidationException("The end date: " + endDate + ", must be after the start date: " + startDate);
 
         return ResponseEntity.ok(expenditureService.searchBetweenTwoDate(startDate, endDate, pageable));
+    }
+
+    @GetMapping("/search/month={month}")
+    public ResponseEntity<Page<ExpenditureResponse>> searchExpenditureByMonth(@PathVariable Integer month, Pageable pageable) {
+
+        if (month == null || month < 1 || month > 12) throw new MonthInvalidException("The month must be between 1 and 12");
+
+        return ResponseEntity.ok(expenditureService.searchByMonth(month, pageable));
     }
 }
