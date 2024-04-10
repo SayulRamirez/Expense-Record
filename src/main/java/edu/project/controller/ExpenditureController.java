@@ -3,6 +3,7 @@ package edu.project.controller;
 import edu.project.domain.ExpenditureRequest;
 import edu.project.domain.ExpenditureResponse;
 import edu.project.domain.ExpenditureUpdate;
+import edu.project.exceptions.DateValidationException;
 import edu.project.services.ExpenditureService;
 import edu.project.services.ExpenditureServiceImpl;
 import jakarta.validation.Valid;
@@ -60,5 +61,14 @@ public class ExpenditureController {
     public ResponseEntity<Page<ExpenditureResponse>> searchExpenditureByDate(@PathVariable LocalDate date, Pageable pageable) {
 
         return ResponseEntity.ok(expenditureService.searchByDate(date, pageable));
+    }
+
+    @GetMapping("/search/startDate={startDate}&endDate={endDate}")
+    public ResponseEntity<Page<ExpenditureResponse>> searchExpenditureBetweenTwoDate(
+            @PathVariable LocalDate startDate, @PathVariable LocalDate endDate, Pageable pageable) {
+
+        if (endDate.isBefore(startDate)) throw new DateValidationException("The end date: " + endDate + ", must be after the start date: " + startDate);
+
+        return ResponseEntity.ok(expenditureService.searchBetweenTwoDate(startDate, endDate, pageable));
     }
 }
