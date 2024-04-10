@@ -16,4 +16,6 @@ public interface ExpenditureService {
     Page<ExpenditureResponse> findAll(Pageable pageable);
 
     Page<ExpenditureResponse> searchByDate(LocalDate date, Pageable pageable);
+
+    Page<ExpenditureResponse> searchBetweenTwoDate(LocalDate startDate, LocalDate endDate, Pageable pageable);
 }

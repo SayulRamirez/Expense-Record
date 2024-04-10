@@ -102,4 +102,19 @@ public class ExpenditureServiceImpl implements ExpenditureService{
                 expenditure.getCategory().getCategory())
         );
     }
+
+    @Override
+    public Page<ExpenditureResponse> searchBetweenTwoDate(LocalDate startDate, LocalDate endDate, Pageable pageable) {
+
+        Page<ExpenditureEntity> expenditures = expenditureRepository.findAllByDateBetween(startDate, endDate, pageable);
+
+        return expenditures.map(expenditure -> new ExpenditureResponse(
+                expenditure.getId(),
+                expenditure.getTitle(),
+                expenditure.getDescription(),
+                expenditure.getAmount(),
+                expenditure.getDate(),
+                expenditure.getCategory().getCategory())
+        );
+    }
 }
